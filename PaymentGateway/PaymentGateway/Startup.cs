@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PaymentGateway.Services;
 using PaymentGateway.Utils;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace PaymentGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IRestClient, RestClient>();
+            services.AddScoped<IPayGateService, PayGateService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
