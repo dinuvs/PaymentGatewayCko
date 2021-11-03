@@ -15,7 +15,7 @@
    <br>
    Issue: There seems to be an issue in data posting to Bank API . The bank Api post works well as a stand alone. The issue needs a analysis and fix, due to lack of time haven't fixed it yet
    <br>
-
+<br>
 
 Improvements to be Done
 <br>
@@ -25,7 +25,16 @@ Improvements to be Done
 4. Use API gateway using OCelot etc. 
 5. Implement more validations in both payment and bank APi's , due to lack to time , could not add all the necesary validations. 
 
+<BR>
+<br>
 
+
+HOW TO RUN THE APPLICATION
+
+1. change appsettings file database connection string to the testable database server
+2. Run Update-Database command from Package Manager console for PaymentGateway project to create the database table 
+3. Run the BankAPI project first if possible 
+4. Run the payment project next and test it using swagger UI. 
 
    
 </body>
