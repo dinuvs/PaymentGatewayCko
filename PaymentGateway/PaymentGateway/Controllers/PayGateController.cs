@@ -22,7 +22,7 @@ namespace PaymentGateway.Controllers
         [Route("ProcessPayment")]
         public async Task<IActionResult> ProcessPayment(string request)
         {
-             await _payGateService.ProcessPayment(request);
+            await _payGateService.ProcessPayment(request);
             return NotFound();
         }
 
