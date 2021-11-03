@@ -1,8 +1,5 @@
 ﻿using BankApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BankApi.Services
 {
@@ -22,7 +19,7 @@ namespace BankApi.Services
 
         private bool ValidateCardNumber(IndividualPayment payment)
         {
-            if (!int.TryParse(payment.cardnumber.Trim(), out _))
+            if (!long.TryParse(payment.cardnumber.Trim(), out long val))
             {
                 ValidationMessage= "Invalid Card Number ";
                 return false;
@@ -44,7 +41,7 @@ namespace BankApi.Services
 
            
             if (int.Parse(payment.expiry.Split("/")[0].Trim()) < DateTime.Now.Month
-                || int.Parse(payment.expiry.Split("/")[1].Trim()) < DateTime.Now.Year)
+                || int.Parse(payment.expiry.Split("/")[1].Trim()) < int.Parse(DateTime.Now.Year.ToString().Substring(2,2)))
             {
                 ValidationMessage += "Card is expired ";
             }
@@ -54,7 +51,7 @@ namespace BankApi.Services
 
         private bool ValidateCvv(IndividualPayment payment)
         {
-            if (!int.TryParse(payment.cvv.Trim(), out _) && payment.cvv.Trim().Length != 3)
+            if (!int.TryParse(payment.cvv.Trim(), out _) || payment.cvv.Trim().Length != 3)
             {
                 ValidationMessage = "Invalid cvv ";
                 return false;
