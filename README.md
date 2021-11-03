@@ -36,5 +36,15 @@ HOW TO RUN THE APPLICATION
 3. Run the BankAPI project first if possible 
 4. Run the payment project next and test it using swagger UI. 
 
+
+CLOUD TECHNOLOGIES TO BE CONSIDERED
+
+1. Database can be AWS RDS MS SQL SERVER
+2. The API's to be launched in the AWS Kubernetes Service (AKS) or in AWS EC2 machines with auto scaling switced on along with load balancer to handle scaling 
+3. The Storing to Database component can be seperated out and queued using any streaming service to store to database if eventual consistency is ok . 
+4. Route 53 service can be used for DNS 
+5. AWS s3 can be used for logging along with Athena
+6. AWS cloud Trail to be used for server and requests monitoring , etc. 
+7. AWS Shield  can be used for DDOS protection 
    
 </body>
