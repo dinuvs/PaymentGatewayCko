@@ -11,11 +11,12 @@ namespace PaymentGateway.Services
     public class PayGateService : IPayGateService
     {
         private readonly IRestClient _restclient;
+        private readonly IConfigurationService _configurationService;
         private string url = "https://api.checkout.com/payments";
-        public PayGateService(IRestClient restclient)
+        public PayGateService(IRestClient restclient,IConfigurationService configurationService)
         {
             _restclient = restclient;
-
+            _configurationService = configurationService;
         }
 
         public async Task ProcessPayment(string paymentRequest)
@@ -39,7 +40,7 @@ namespace PaymentGateway.Services
                 }
             };
 
-            var response = await _restclient.PostAsync(url, paymentRequestCko);
+            var response = await _restclient.PostAsync(_configurationService.GetBankingApiConfig, paymentRequestCko);
         }
     }
 }
