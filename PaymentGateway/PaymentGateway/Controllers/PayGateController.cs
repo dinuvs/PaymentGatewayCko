@@ -27,7 +27,6 @@ namespace PaymentGateway.Controllers
                     return Ok(transactionWithStatus);
                 }
             }
-            
             return NotFound();
         }
 
@@ -35,7 +34,7 @@ namespace PaymentGateway.Controllers
         [Route("ProcessPayment")]
         public async Task<IActionResult> ProcessPayment(string request)
         {
-            var transactionWithStatus=await _payGateService.ProcessPaymentAsync(request);
+            var transactionWithStatus = await _payGateService.ProcessPaymentAsync(request);
             if(transactionWithStatus != null)
             {
                 return Ok(transactionWithStatus.Status);

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PaymentGateway.DataAccess.Model;
 using PaymentGateway.DataAccess.Repository;
+using PaymentGateway.Extensions;
 using PaymentGateway.Services;
 using PaymentGateway.Utils;
 using System;
@@ -44,7 +45,7 @@ namespace PaymentGateway
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Exception> logger)
         {
             if (env.IsDevelopment())
             {
@@ -52,7 +53,7 @@ namespace PaymentGateway
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PaymentGateway v1"));
             }
-
+            app.ConfigureExceptionHandler(logger);
             app.UseHttpsRedirection();
 
             app.UseRouting();
