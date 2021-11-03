@@ -7,14 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using PaymentGateway.Services;
-using PaymentGateway.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PaymentGateway
+namespace BankApi
 {
     public class Startup
     {
@@ -28,13 +26,11 @@ namespace PaymentGateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IRestClient, RestClient>();
-            services.AddScoped<IPayGateService, PayGateService>();
-            services.AddSingleton<IConfigurationService, ConfigurationService>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PaymentGateway", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BankApi", Version = "v1" });
             });
         }
 
@@ -45,7 +41,7 @@ namespace PaymentGateway
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PaymentGateway v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BankApi v1"));
             }
 
             app.UseHttpsRedirection();
