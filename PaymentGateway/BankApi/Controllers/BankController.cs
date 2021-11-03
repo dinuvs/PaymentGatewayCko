@@ -26,7 +26,7 @@ namespace BankApi.Controllers
         public IActionResult Index()
         {
 
-            return Ok();
+            return Ok("hello");
         }
 
 

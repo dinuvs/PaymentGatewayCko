@@ -21,26 +21,22 @@ namespace PaymentGateway.Services
 
         public async Task ProcessPayment(string paymentRequest)
         {
+            var test = await _restclient.GetAsync(_configurationService.GetBankingApiGetConfig);
+
             var paymentObj = JsonConvert.DeserializeObject<Payment>(paymentRequest);
-            PaymentRequestCko paymentRequestCko = new()
+            PaymentRequestBank paymentRequestBank = new()
             {
                 amount = paymentObj.amount,
                 currency = paymentObj.currency,
-                source = new()
-                {
-                    country = paymentObj.country,
-                    integration_type = "redirect",
-                    type = "oxxo",
-                    description = "simulate OXXO Demo Payment",
-                    payer = new()
-                    {
-                        name = paymentObj.name,
-                        email = paymentObj.email
-                    }
-                }
+                name=paymentObj.name,
+                cardnumber=paymentObj.cardnumber,
+                expiry=paymentObj.expiry,
+                cvv=paymentObj.cvv,
+                country=paymentObj.country
+               
             };
 
-            var response = await _restclient.PostAsync(_configurationService.GetBankingApiConfig, paymentRequestCko);
+            var response = await _restclient.PostAsync(_configurationService.GetBankingApiConfig, paymentRequestBank);
         }
     }
 }

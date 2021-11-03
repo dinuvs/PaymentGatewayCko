@@ -18,5 +18,6 @@ namespace PaymentGateway.Services
             _configuration = configuration;
         }
         public string GetBankingApiConfig => _configuration.GetSection("BankingApi").Value;
+        public string GetBankingApiGetConfig => _configuration.GetSection("BankingApiGet").Value;
     }
 }

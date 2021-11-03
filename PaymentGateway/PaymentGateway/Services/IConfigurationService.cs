@@ -8,5 +8,6 @@ namespace PaymentGateway.Services
     public interface IConfigurationService
     {
         string GetBankingApiConfig { get; }
+        string GetBankingApiGetConfig { get; }
     }
 }
