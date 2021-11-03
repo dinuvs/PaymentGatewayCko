@@ -38,9 +38,16 @@ namespace PaymentGateway.Utils
 
                 using (HttpResponseMessage response = await client.PostAsync(uri, serialized))
                 {
-                    response.EnsureSuccessStatusCode();
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    return responseBody;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        //response.EnsureSuccessStatusCode();
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        return responseBody;
+                    }
+                    else
+                    {
+                        return "UnSuccessful";
+                    }
                     // return JsonConvert.DeserializeObject<TOut>(responseBody);
                 }
             }

@@ -2,11 +2,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PaymentGateway.DataAccess.Model;
+using PaymentGateway.DataAccess.Repository;
 using PaymentGateway.Services;
 using PaymentGateway.Utils;
 using System;
@@ -28,6 +31,8 @@ namespace PaymentGateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PaymentGatewayDBConnection")));
+            services.AddScoped <ITransactionDetailRepository, TransactionDetailRepository>();
             services.AddScoped<IRestClient, RestClient>();
             services.AddScoped<IPayGateService, PayGateService>();
             services.AddSingleton<IConfigurationService, ConfigurationService>();
